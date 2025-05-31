@@ -1,5 +1,5 @@
 {
     "builds": [
-        { "source": "/(.*)", "use": "/api/index" }
+        { "src": "/(.*)", "use": "/api/index" }
     ]
 }
