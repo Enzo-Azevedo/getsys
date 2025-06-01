@@ -2,6 +2,6 @@ from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
-@app.route("/", methods=["GET"])
+@app.get("/")
 def home():
     return jsonify({"message": "API funcionando!"})
