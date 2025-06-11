@@ -1,8 +1,15 @@
-import os
-from supabase import create_client, Client
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+from __getenv__ import return_env
 
-def supabase():
-    url = os.environ.get("SUPABASE_URL")
-    key = os.environ.get("SUPABASE_KEY")
-    supabase: Client = create_client(url, key)
-    return supabase
+
+db = SQLAlchemy()
+
+app = Flask(__name__)
+app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://postgres:{}@{}:{}/postgres".format(return_env("SUPABASE_KEY"), return_env("SUPABASE_URL"), return_env("SUPABASE_PORT"))
+
+db.init_app(app)
+
+class SupaBase(db.Model):
+    userkey = db.Column(db.String, primary_key=True)
+    
