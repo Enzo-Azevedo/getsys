@@ -1,7 +1,10 @@
 from flask import Flask, jsonify, request
+from .db import supabase
 
 app = Flask(__name__)
 
-@app.get("/")
+@app.route("/", rule=SyncClient)
 def home():
-    return jsonify({"message": "API funcionando!"})
+    a = supabase()
+    return a
+
